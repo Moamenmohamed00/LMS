@@ -2,13 +2,13 @@ using LMS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace LMS.Infrastructure.Data.Configurations;
+namespace LMS.Infrastructure.Data.Configurations
 {
     public class CertificateConfiguration : IEntityTypeConfiguration<Certificate>
 {
     public void Configure(EntityTypeBuilder<Certificate> builder)
     {
-        builder.Property(c => c.Id).IsRequired();
+        builder.HasKey(c => c.Id);
         builder.Property(c => c.StudentId).IsRequired();
         builder.Property(c => c.CourseId).IsRequired();
         builder.Property(c=>c.CertificateNumber).IsRequired();

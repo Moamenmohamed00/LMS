@@ -8,7 +8,7 @@ namespace LMS.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.Property(c=>c.Id).IsRequired();
+            builder.HasKey(c=>c.Id);
             builder.Property(c=>c.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(c=>c.LastUpdatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(c=>c.IsPinned).HasDefaultValueSql("False");

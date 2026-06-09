@@ -8,7 +8,7 @@ namespace LMS.Infrastructure.Data
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(c=>c.Id).IsRequired();
+            builder.HasKey(c=>c.Id);
             builder.Property(c=>c.Name).IsRequired().HasMaxLength(100);
             builder.HasIndex(c=>c.Name).IsUnique();
             builder.Property(c=>c.Description).IsRequired().HasMaxLength(1000);

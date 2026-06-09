@@ -8,7 +8,7 @@ namespace LMS.Infrastructure.Data
     {
         public void Configure(EntityTypeBuilder<AuditLog> builder)
         {
-            builder.Property(a=>a.Id).IsRequired();
+            builder.HasKey(a=>a.Id);
             builder.Property(a=>a.UserId).IsRequired();
             builder.Property(a=>a.Action).IsRequired().HasMaxLength(100);
             builder.Property(a=>a.EntityType).IsRequired().HasMaxLength(100);

@@ -10,7 +10,7 @@ namespace LMS.Infrastructure.Data.Configurations
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Assignment> builder)
         {
-            builder.Property(a=>a.Id).IsRequired();
+            builder.HasKey(a=>a.Id);
             builder.Property(a=>a.Title).IsRequired().HasMaxLength(50);
             builder.Property(a=>a.Instructions).IsRequired().HasMaxLength(1000);
             builder.Property(a=>a.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");

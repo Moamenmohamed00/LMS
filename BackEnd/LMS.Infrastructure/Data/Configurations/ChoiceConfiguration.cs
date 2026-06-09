@@ -8,7 +8,7 @@ namespace LMS.Infrastructure.Data.Configurations
 {
     public void Configure(EntityTypeBuilder<Choice> builder)
     {
-        builder.Property(c=>c.Id).IsRequired();
+        builder.HasKey(c=>c.Id);
         builder.Property(c=>c.QuestionId).IsRequired();
         builder.Property(c=>c.Text).IsRequired().HasMaxLength(150);
         builder.Property(c=>c.IsCorrect).IsRequired().HasDefaultValueSql("False");
