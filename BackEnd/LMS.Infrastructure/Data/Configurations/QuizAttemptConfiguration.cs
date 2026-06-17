@@ -18,9 +18,9 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.Score).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
-            builder.HasOne(x => x.Student).WithMany(x => x.QuizAttempts).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(x => x.Quiz).WithMany(x => x.QuizAttempts).HasForeignKey(x => x.QuizId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasMany(x => x.StudentAnswers).WithOne(x => x.QuizAttempt).HasForeignKey(x => x.QuizAttemptId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Student).WithMany(x => x.QuizAttempts).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Quiz).WithMany(x => x.QuizAttempts).HasForeignKey(x => x.QuizId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.StudentAnswers).WithOne(x => x.QuizAttempt).HasForeignKey(x => x.QuizAttemptId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

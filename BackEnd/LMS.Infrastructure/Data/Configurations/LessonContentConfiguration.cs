@@ -19,7 +19,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.Type).IsRequired().HasConversion<string>();
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GetDate()");
-            builder.HasOne(x => x.Lesson).WithMany(x => x.LessonContents).HasForeignKey(x => x.LessonId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Lesson).WithMany(x => x.LessonContents).HasForeignKey(x => x.LessonId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

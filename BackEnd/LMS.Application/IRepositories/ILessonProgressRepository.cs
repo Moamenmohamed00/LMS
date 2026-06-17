@@ -1,8 +1,7 @@
-using System.Linq.Expressions;
 using LMS.Domain.Entities;
 
-namespace LMS.Domain.Interfaces.Repositories;
-
+namespace LMS.Application.Irepo
+{
 public interface ILessonProgressRepository:IGenericRepository<LessonProgress>
 {
     Task<LessonProgress?> GetByUserAndLessonAsync(Guid userId, Guid lessonId);
@@ -12,4 +11,5 @@ public interface ILessonProgressRepository:IGenericRepository<LessonProgress>
     // Task<LessonProgress> UpsertAsync(LessonProgress progress);
     Task<int> GetCompletedCountByLessonAsync(Guid lessonId);
     Task<IEnumerable<LessonProgress>>GetByEnrollmentAsync(Guid enrollmentId);
+}
 }

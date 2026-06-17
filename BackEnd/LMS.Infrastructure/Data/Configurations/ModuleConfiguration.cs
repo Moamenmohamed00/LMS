@@ -18,8 +18,8 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.HasCheckConstraint("CK_OrderIndex", "OrderIndex > 0");
-            builder.HasOne(x => x.Course).WithMany(x => x.Modules).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasMany(x => x.Lessons).WithOne(x => x.Module).HasForeignKey(x => x.ModuleId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Course).WithMany(x => x.Modules).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Lessons).WithOne(x => x.Module).HasForeignKey(x => x.ModuleId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

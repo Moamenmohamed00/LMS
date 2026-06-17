@@ -1,7 +1,6 @@
-using System.Linq.Expressions;
 using LMS.Domain.Entities;
 
-namespace LMS.Domain.Interfaces.Repositories;
+namespace LMS.Application.Irepo;
 
 public interface IExamRepository:IGenericRepository<Exam>
 {

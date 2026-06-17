@@ -16,10 +16,11 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.CourseId).HasMaxLength(50).IsRequired();
             builder.Property(x => x.ProgressPercentage).HasDefaultValue(0).HasColumnType("decimal(3,2)").IsRequired();
             builder.Property(x => x.IsCompleted).HasDefaultValue(false).IsRequired();
-            builder.Property(x => x.EnrolledAt).HasDefaultValue(DateTime.Now).IsRequired();
+            builder.Property(x => x.EnrolledAt).HasDefaultValueSql("GETDATE()").IsRequired();
             builder.Property(x => x.CompletedAt).IsRequired(false);
-            builder.Property(x => x.CreatedAt).HasDefaultValue(DateTime.Now).IsRequired();
+            builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETDATE()").IsRequired();
             builder.Property(x => x.LastUpdatedAt).IsRequired(false);
+            builder.HasIndex(x=>new {x.StudentId,x.CourseId}).IsUnique();
             builder.HasOne(x => x.Student).WithMany(x => x.Enrollments).HasForeignKey(x => x.StudentId);
             builder.HasOne(x => x.Course).WithMany(x => x.Enrollments).HasForeignKey(x => x.CourseId);
             builder.HasMany(x => x.LessonProgresses).WithOne(x => x.Enrollment).HasForeignKey(x => x.EnrollmentId);

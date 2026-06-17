@@ -37,25 +37,26 @@ namespace LMS.Infrastructure.Identity
                     RoleClaimType = System.Security.Claims.ClaimTypes.Role
                 };
             });
-            services.AddIdentity<ApplicationUser,IdentityRole<Guid>>(
-                option=>{
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
+                option =>
+                {
                     option.Password.RequiredLength = 8;
                     option.Password.RequireDigit = true;
                     option.Password.RequireNonAlphanumeric = true;
                     option.Password.RequireUppercase = true;
                     option.Password.RequireLowercase = true;
 
-                    option.Lockout.AllowedForNewUsers=true;
-                    option.Lockout.DefaultLockoutTimeSpan=TimeSpan.FromMinutes(10);
-                    option.Lockout.MaxFailedAccessAttempts=5;
+                    option.Lockout.AllowedForNewUsers = true;
+                    option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                    option.Lockout.MaxFailedAccessAttempts = 5;
 
-                    option.User.RequireUniqueEmail=true;
+                    option.User.RequireUniqueEmail = true;
 
                 }
-             )//.AddEntityFrameworkStores<LMSDBContext>()
-            // .AddDefaultTokenProviders()
-            ;
-            services.AddScoped<IJwtTokenService,JwtTokenService>();
+             )
+            .AddEntityFrameworkStores<LMSDBContext>()
+            .AddDefaultTokenProviders();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
             return services;
         }
     }

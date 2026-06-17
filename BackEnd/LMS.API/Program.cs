@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Serilog;
-
+using LMS.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,11 +16,9 @@ builder.Host.UseSerilog((context, configuration) =>
 }); 
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<LMSDBContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))
-    .AddIdentity<ApplicationUser,IdentityRole<Guid>>()
-    .AddEntityFrameworkStores<LMSDBContext>()
-    .AddDefaultTokenProviders();
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddSwaggerGen(options=>{
     options.SwaggerDoc("v1",new OpenApiInfo{
@@ -53,6 +51,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.MapControllers();
 app.Run();
 

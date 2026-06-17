@@ -17,9 +17,9 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
 
-            builder.HasOne(x => x.Assignment).WithMany(x => x.Submissions).HasForeignKey(x => x.AssignmentId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(x => x.Student).WithMany(x => x.Submissions).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(x => x.Grade).WithOne(x => x.Submission).HasForeignKey<Grade>(x => x.SubmissionId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Assignment).WithMany(x => x.Submissions).HasForeignKey(x => x.AssignmentId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Student).WithMany(x => x.Submissions).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Grade).WithOne(x => x.Submission).HasForeignKey<Grade>(x => x.SubmissionId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

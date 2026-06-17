@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using LMS.Infrastructure.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +13,7 @@ namespace LMS.Infrastructure.Data
     {
         public LMSDBContext(DbContextOptions<LMSDBContext> options):base(options)
         {}
-        public DbSet<ApplicationUser> Users {  get; set; }
+        // public DbSet<ApplicationUser> Users {  get; set; }
         public DbSet<Assignment> Assignment { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
         public DbSet<Category> Category { get; set; }
@@ -35,8 +36,10 @@ namespace LMS.Infrastructure.Data
         public DbSet<QuizAttempt> QuizAttempts { get; set; }
         public DbSet<StudentAnswer> StudentAnswers { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(LMSDBContext).Assembly);
         }
     }

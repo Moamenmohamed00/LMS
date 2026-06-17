@@ -17,7 +17,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.Type).IsRequired().HasConversion<string>();
             builder.Property(x => x.IsRead).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GetDate()");
-            builder.HasOne(x => x.User).WithMany(x => x.Notifications).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.User).WithMany(x => x.Notifications).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -15,9 +15,9 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.ShowResultImmediately).IsRequired();
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
-            builder.HasOne(x => x.Lesson).WithOne(x => x.Quiz).HasForeignKey<Quiz>(x => x.LessonId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasMany(x => x.Questions).WithOne(x => x.Quiz).HasForeignKey(x => x.QuizId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasMany(x => x.QuizAttempts).WithOne(x => x.Quiz).HasForeignKey(x => x.QuizId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Lesson).WithOne(x => x.Quiz).HasForeignKey<Quiz>(x => x.LessonId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Questions).WithOne(x => x.Quiz).HasForeignKey(x => x.QuizId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.QuizAttempts).WithOne(x => x.Quiz).HasForeignKey(x => x.QuizId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

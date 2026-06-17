@@ -16,7 +16,7 @@ namespace LMS.Infrastructure.Data.Configurations
         builder.Property(c=>c.QrCodeData).IsRequired();
         builder.Property(c => c.IssuedAt).IsRequired().HasDefaultValueSql("GETDATE()");
         builder.Property(c => c.PdfUrl).IsRequired().HasMaxLength(256);
-         builder.HasCheckConstraint("CHK_CertificateUrl", "CertificateUrl LIKE 'https%_.__%' ");
+         builder.HasCheckConstraint("CHK_CertificateUrl", "PdfUrl LIKE 'https%_.__%' ");
         builder.Property(c => c.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
         builder.Property(c => c.LastUpdatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
 

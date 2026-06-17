@@ -20,8 +20,8 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.ProviderTransactionId).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Provider).IsRequired().HasMaxLength(50);
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GetDate()");
-            builder.HasOne(x => x.Student).WithMany(x => x.Payments).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(x => x.Course).WithMany(x => x.Payments).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Student).WithMany(x => x.Payments).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Course).WithMany(x => x.Payments).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
             builder.HasCheckConstraint("CK_Status", "Status IN ('Pending', 'Success', 'Failed')");
             builder.HasCheckConstraint("CK_Amount", "Amount > 0");
         }

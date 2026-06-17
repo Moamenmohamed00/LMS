@@ -33,6 +33,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.HasMany(u=>u.Submissions).WithOne(s=>s.Student).HasForeignKey(s=>s.StudentId);
             builder.HasMany(u=>u.GradesGiven).WithOne(g=>g.GradedBy).HasForeignKey(g=>g.GradedById);
             builder.HasMany(u=>u.AuditLogs).WithOne(a=>a.User).HasForeignKey(a=>a.UserId);
+            builder.HasMany(u=>u.RefreshTokens).WithOne(r=>r.User).HasForeignKey(r=>r.UserId);
         }
     }
 }

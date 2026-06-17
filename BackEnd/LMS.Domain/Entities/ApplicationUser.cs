@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-
 namespace LMS.Domain.Entities;
 
 public class ApplicationUser : IdentityUser<Guid>
@@ -19,4 +18,5 @@ public class ApplicationUser : IdentityUser<Guid>
     public ICollection<Submission> Submissions { get; set; } = new List<Submission>();
     public ICollection<Grade> GradesGiven { get; set; } = new List<Grade>();
     public ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 }
