@@ -15,7 +15,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.LessonId).IsRequired();
             builder.Property(x => x.EnrollmentId).IsRequired();
             builder.Property(x => x.WatchPercentage).IsRequired().HasColumnType("decimal(18,2)");
-            builder.Property(x => x.IsCompleted).IsRequired().HasDefaultValue(false);
+            builder.Property(x => x.IsCompleted).IsRequired().HasDefaultValueSql("CAST(0 AS BIT)");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.HasOne(x => x.Lesson).WithMany(x => x.LessonProgresses).HasForeignKey(x => x.LessonId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.Enrollment).WithMany(x => x.LessonProgresses).HasForeignKey(x => x.EnrollmentId).OnDelete(DeleteBehavior.Restrict);

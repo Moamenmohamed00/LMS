@@ -11,7 +11,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.SubmittedAt).IsRequired().HasDefaultValueSql("GETDATE()");
-            builder.Property(x => x.Grade).IsRequired().HasDefaultValue(0);
+            // builder.Property(x => x.Grade).IsRequired().HasDefaultValue(0);
             builder.Property(x => x.FileUrl).IsRequired().HasMaxLength(1000);
             builder.Property(x => x.FileName).IsRequired().HasMaxLength(1000);
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");

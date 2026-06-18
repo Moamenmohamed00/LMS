@@ -15,7 +15,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.Title).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Message).IsRequired().HasColumnType("ntext");
             builder.Property(x => x.Type).IsRequired().HasConversion<string>();
-            builder.Property(x => x.IsRead).IsRequired().HasDefaultValue(false);
+            builder.Property(x => x.IsRead).IsRequired().HasDefaultValueSql("CAST(0 AS BIT)");
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.HasOne(x => x.User).WithMany(x => x.Notifications).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
         }

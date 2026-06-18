@@ -11,14 +11,17 @@
     <ProjectReference Include="..\LMS.Application\LMS.Application.csproj" />
 </ItemGroup>
 <ItemGroup>
-<PackageReference Include="CloudinaryDotNet" Version="1.29.1" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.8" />
-<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.8" />
-<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.8" />
+<PackageReference Include="CloudinaryDotNet" Version="1.29.2" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.9">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.9" />
+<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" />
 <PackageReference Include="QRCoder" Version="1.8.0" />
 <PackageReference Include="itext7" Version="8.0.0" />
-<PackageReference Include="Stripe.net" Version="51.2.0" />
+<PackageReference Include="Stripe.net" Version="52.0.0" />
 
 </ItemGroup>
 

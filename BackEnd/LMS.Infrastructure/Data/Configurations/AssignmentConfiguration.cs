@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using LMS.Domain.Entities;
@@ -23,7 +23,7 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.HasCheckConstraint("CHK_Deadline", "Deadline > GETDATE()");
             builder.HasCheckConstraint("CHK_AttachmentUrl", "AttachmentUrl LIKE 'https%_.__%'");
 
-            builder.HasMany(a=>a.Submissions).WithOne(s=>s.Assignment).HasForeignKey(s=>s.AssignmentId);
+            builder.HasMany(a=>a.Submissions).WithOne(s=>s.Assignment).HasForeignKey(s=>s.AssignmentId).OnDelete(DeleteBehavior.Restrict);
 
         }
     }

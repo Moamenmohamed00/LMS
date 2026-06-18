@@ -17,9 +17,9 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x=>x.SubmissionId).IsRequired(false);
             builder.Property(x=>x.ExamAttemptId).IsRequired(false);
             builder.Property(x=>x.GradedById).IsRequired();
-            builder.HasOne(x=>x.Submission).WithOne(x=>x.Grade).HasForeignKey<Grade>(x=>x.SubmissionId);
-            builder.HasOne(x=>x.ExamAttempt).WithOne(x=>x.Grade).HasForeignKey<Grade>(x=>x.ExamAttemptId);
-            builder.HasOne(x=>x.GradedBy).WithMany(x=>x.GradesGiven).HasForeignKey(x=>x.GradedById);
+            builder.HasOne(x=>x.Submission).WithOne(x=>x.Grade).HasForeignKey<Grade>(x=>x.SubmissionId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x=>x.ExamAttempt).WithOne(x=>x.Grade).HasForeignKey<Grade>(x=>x.ExamAttemptId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x=>x.GradedBy).WithMany(x=>x.GradesGiven).HasForeignKey(x=>x.GradedById).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

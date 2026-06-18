@@ -11,7 +11,7 @@ namespace LMS.Infrastructure.Data.Configurations
         builder.HasKey(c=>c.Id);
         builder.Property(c=>c.QuestionId).IsRequired();
         builder.Property(c=>c.Text).IsRequired().HasMaxLength(150);
-        builder.Property(c=>c.IsCorrect).IsRequired().HasDefaultValueSql("False");
+        builder.Property(c=>c.IsCorrect).IsRequired().HasDefaultValueSql("CAST(0 AS BIT)");
         builder.Property(c=>c.OrderIndex).IsRequired();
         builder.Property(c=>c.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
         builder.Property(c=>c.LastUpdatedAt).IsRequired().HasDefaultValueSql("GETDATE()");

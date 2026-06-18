@@ -14,23 +14,23 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.Title).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(1000).IsRequired();
             builder.Property(x => x.Price).IsRequired().HasColumnType("decimal(18,2)");
-            builder.Property(x => x.Category).IsRequired();
+            builder.Property(x => x.CategoryId).IsRequired();
             builder.Property(x => x.ThumbnailUrl).HasMaxLength(500).IsRequired();
             builder.HasCheckConstraint("CK_Course_Price", "Price >= 0");
             builder.HasCheckConstraint("CK_Course_ThumbnailUrl", "ThumbnailUrl LIKE 'http(s)://%' OR ThumbnailUrl LIKE '%.(jpg|jpeg|png|gif)'");
             builder.Property(x => x.Status).HasMaxLength(50).IsRequired().HasConversion<string>();
             builder.Property(x => x.TotalLessons).HasDefaultValue(0);
             builder.Property(x => x.PublishedAt).HasDefaultValueSql("GETDATE()");
-            builder.HasOne(x => x.Instructor).WithMany(x => x.CoursesTaught).HasForeignKey(x => x.InstructorId);
-            builder.HasOne(x => x.Category).WithMany(x => x.Courses).HasForeignKey(x => x.CategoryId);
-            builder.HasMany(x => x.Modules).WithOne(x => x.Course).HasForeignKey(x => x.CourseId);
-            builder.HasMany(x => x.Enrollments).WithOne(x => x.Course).HasForeignKey(x => x.CourseId);
-            builder.HasMany(x => x.Exams).WithOne(x => x.Course).HasForeignKey(x => x.CourseId);
-            builder.HasMany(x => x.Certificates).WithOne(x => x.Course).HasForeignKey(x => x.CourseId);
-            builder.HasMany(x => x.Payments).WithOne(x => x.Course).HasForeignKey(x => x.CourseId);
+            builder.HasOne(x => x.Instructor).WithMany(x => x.CoursesTaught).HasForeignKey(x => x.InstructorId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Category).WithMany(x => x.Courses).HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Modules).WithOne(x => x.Course).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Enrollments).WithOne(x => x.Course).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Exams).WithOne(x => x.Course).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Certificates).WithOne(x => x.Course).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Payments).WithOne(x => x.Course).HasForeignKey(x => x.CourseId).OnDelete(DeleteBehavior.Restrict);
             builder.HasQueryFilter(x => x.Status == CourseStatus.Published);
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETDATE()");
-            builder.Property(x => x.LastUpdatedAt).IsRequired(false);
+            builder.Property(x => x.LastUpdatedAt).IsRequired(true).HasDefaultValueSql("GETDATE()");
         }
     }
 }

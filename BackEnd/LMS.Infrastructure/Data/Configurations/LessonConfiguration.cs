@@ -21,12 +21,12 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.CreatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.Property(x => x.LastUpdatedAt).IsRequired().HasDefaultValueSql("GetDate()");
             builder.Property(x => x.ModuleId).IsRequired();
-            builder.HasOne(x => x.Module).WithMany(x => x.Lessons).HasForeignKey(x => x.ModuleId);
-            builder.HasMany(x=>x.LessonContents).WithOne(x=>x.Lesson).HasForeignKey(x=>x.LessonId);
-            builder.HasMany(x=>x.Comments).WithOne(x=>x.Lesson).HasForeignKey(x=>x.LessonId);
-            builder.HasMany(x=>x.LessonProgresses).WithOne(x=>x.Lesson).HasForeignKey(x=>x.LessonId);
-            builder.HasOne(x=>x.Quiz).WithOne(x=>x.Lesson).HasForeignKey<Quiz>(x=>x.LessonId);
-            builder.HasOne(x=>x.Assignment).WithOne(x=>x.Lesson).HasForeignKey<Assignment>(x=>x.LessonId);
+            builder.HasOne(x => x.Module).WithMany(x => x.Lessons).HasForeignKey(x => x.ModuleId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x=>x.LessonContents).WithOne(x=>x.Lesson).HasForeignKey(x=>x.LessonId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x=>x.Comments).WithOne(x=>x.Lesson).HasForeignKey(x=>x.LessonId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x=>x.LessonProgresses).WithOne(x=>x.Lesson).HasForeignKey(x=>x.LessonId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x=>x.Quiz).WithOne(x=>x.Lesson).HasForeignKey<Quiz>(x=>x.LessonId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x=>x.Assignment).WithOne(x=>x.Lesson).HasForeignKey<Assignment>(x=>x.LessonId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

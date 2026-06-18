@@ -18,14 +18,14 @@ namespace LMS.Infrastructure.Data.Configurations
             builder.Property(x => x.AttemptNumber).IsRequired();
             builder.Property(x => x.StartedAt).HasDefaultValueSql("GetDate()").IsRequired();
             builder.Property(x => x.SubmittedAt).IsRequired(false);
-            builder.Property(x=>x.Passed).HasDefaultValue(false).IsRequired();
-            builder.Property(x=>x.AutoSubmitted).HasDefaultValue(false).IsRequired();
+            builder.Property(x=>x.Passed).HasDefaultValueSql("CAST(0 AS BIT)").IsRequired();
+            builder.Property(x=>x.AutoSubmitted).HasDefaultValueSql("CAST(0 AS BIT)").IsRequired();
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("GetDate()").IsRequired();
-            builder.Property(x => x.LastUpdatedAt).IsRequired(false);
-            builder.HasOne(x => x.Exam).WithMany(x => x.ExamAttempts).HasForeignKey(x => x.ExamId);
-            builder.HasOne(x => x.Student).WithMany(x => x.ExamAttempts).HasForeignKey(x => x.StudentId);
-            builder.HasMany(x=>x.StudentAnswers).WithOne(x=>x.ExamAttempt).HasForeignKey(x=>x.ExamAttemptId);
-            builder.HasOne(x=>x.Grade).WithOne(x=>x.ExamAttempt).HasForeignKey<Grade>(x=>x.ExamAttemptId);
+            builder.Property(x => x.LastUpdatedAt).IsRequired(true).HasDefaultValueSql("GetDate()");
+            builder.HasOne(x => x.Exam).WithMany(x => x.ExamAttempts).HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Student).WithMany(x => x.ExamAttempts).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x=>x.StudentAnswers).WithOne(x=>x.ExamAttempt).HasForeignKey(x=>x.ExamAttemptId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x=>  x.Grade).WithOne(x=>x.ExamAttempt).HasForeignKey<Grade>(x=>x.ExamAttemptId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

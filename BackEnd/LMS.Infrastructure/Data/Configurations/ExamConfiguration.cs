@@ -22,15 +22,18 @@ namespace LMS.Infrastructure.Data.Configurations
             // Relationships
             builder.HasOne(x=>x.Course)
             .WithMany(x=>x.Exams)
-            .HasForeignKey(x=>x.CourseId);
+            .HasForeignKey(x=>x.CourseId)
+            .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x=>x.Questions)
             .WithOne(x=>x.Exam)
-            .HasForeignKey(x=>x.ExamId);
+            .HasForeignKey(x=>x.ExamId)
+            .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x=>x.ExamAttempts)
             .WithOne(x=>x.Exam)
-            .HasForeignKey(x=>x.ExamId);
+            .HasForeignKey(x=>x.ExamId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
