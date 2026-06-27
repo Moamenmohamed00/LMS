@@ -1,6 +1,7 @@
+using LMS.Application.Irepo;
 using LMS.Domain.Entities;
 
-namespace LMS.Application.Irepo
+namespace LMS.Application.IRepositories
 {
 public interface IEnrollmentRepository : IGenericRepository<Enrollment>
 {

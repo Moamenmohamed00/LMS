@@ -5,9 +5,9 @@ namespace LMS.Application.Services
     public interface IJwtTokenService
     {
         Task<string> GenerateTokenAsync(ApplicationUser user,IEnumerable<string> roles);
-        Task<RefreshToken> GenerateRefreshToken(ApplicationUser user);
+        Task<string> GenerateRefreshToken(ApplicationUser user);
         Task RevokeRefreshToken(string refreshToken);
         Task RevokeUserRefreshTokens(Guid userId);
-        Task<RefreshToken?> ValidateRefreshToken(string refreshToken,ApplicationUser user);
+        Task<(ApplicationUser User, string RefreshToken)?> RotateRefreshToken(string refreshToken);
     }
 }

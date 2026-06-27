@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+LMS.API/appsettings.Local.json
+secrets.json
+*.log

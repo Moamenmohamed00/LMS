@@ -13,6 +13,6 @@ public class RefreshToken
     public bool IsActive => RevokedAt == null && !IsExpired; 
 
     public Guid UserId { get; set; } 
-    public ApplicationUser User { get; set; }
+    public ApplicationUser User { get; set; } = null!;
 }
 }

@@ -16,7 +16,8 @@ namespace LMS.Infrastructure.Identity
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<JwtSettings>(config.GetSection("JWT"));
+            services.AddOptions<JwtSettings>().Bind(config.GetSection("JWT"))
+                .ValidateDataAnnotations().ValidateOnStart();
 
             services.AddAuthentication(options =>
             {
@@ -34,7 +35,8 @@ namespace LMS.Infrastructure.Identity
                     ValidIssuer = config["JWT:Issuer"],
                     ValidAudience = config["JWT:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]!)),
-                    RoleClaimType = System.Security.Claims.ClaimTypes.Role
+                    RoleClaimType = System.Security.Claims.ClaimTypes.Role,
+                    ClockSkew = TimeSpan.Zero
                 };
             });
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
@@ -51,6 +53,7 @@ namespace LMS.Infrastructure.Identity
                     option.Lockout.MaxFailedAccessAttempts = 5;
 
                     option.User.RequireUniqueEmail = true;
+                    option.SignIn.RequireConfirmedEmail = true;
 
                 }
              )

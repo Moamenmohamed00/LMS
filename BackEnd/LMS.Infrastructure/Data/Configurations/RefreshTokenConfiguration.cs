@@ -10,8 +10,8 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
     {
         builder.HasKey(r =>r.Id);
         builder.Property(r=>r.Id).ValueGeneratedOnAdd();//identity
-        builder.HasIndex(r =>new{r.Token,r.UserId});
-        builder.Property(r => r.Token).IsRequired();
+        builder.HasIndex(r => r.Token).IsUnique();
+        builder.Property(r => r.Token).HasMaxLength(64).IsRequired();
         builder.Property(r => r.ExpiresAt).IsRequired();
         builder.Property(r => r.CreatedAt).IsRequired();
         
