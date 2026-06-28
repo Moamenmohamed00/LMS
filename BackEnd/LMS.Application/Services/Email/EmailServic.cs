@@ -1,8 +1,10 @@
 using System.Net;
-using System.Net.Mail;
 using LMS.Application.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 
 namespace LMS.Application.Services.Email;
 
@@ -29,20 +31,28 @@ public sealed class EmailService : IEmailService
 
         try
         {
-            using var client = new SmtpClient(_smtp.Host, _smtp.Port)
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(_smtp.AppName, _smtp.FromEmail));
+            message.To.Add(MailboxAddress.Parse(to));
+            message.Subject = subject;
+
+            var bodyBuilder = new BodyBuilder { HtmlBody = body };
+            message.Body = bodyBuilder.ToMessageBody();
+
+            using var client = new SmtpClient();
+            
+            // MailKit's 'Auto' is usually best, but we will respect the EnableSsl flag for exact parity
+            var secureSocketOptions = _smtp.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.Auto;
+            await client.ConnectAsync(_smtp.Host, _smtp.Port, secureSocketOptions);
+
+            if (!string.IsNullOrEmpty(_smtp.Username) && !string.IsNullOrEmpty(_smtp.Password))
             {
-                EnableSsl = _smtp.EnableSsl,
-                Credentials = new NetworkCredential(_smtp.Username, _smtp.Password)
-            };
-            using var message = new MailMessage
-            {
-                From = new MailAddress(_smtp.FromEmail, _smtp.AppName),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            };
-            message.To.Add(to);
-            await client.SendMailAsync(message);
+                await client.AuthenticateAsync(_smtp.Username, _smtp.Password);
+            }
+
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
+            
             return true;
         }
         catch (Exception exception)
