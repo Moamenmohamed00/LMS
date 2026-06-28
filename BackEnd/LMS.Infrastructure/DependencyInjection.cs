@@ -21,7 +21,6 @@ namespace LMS.Infrastructure
                 .Bind(configuration.GetSection(AppUrlSettings.SectionName))
                 .ValidateDataAnnotations().ValidateOnStart();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailService, EmailService>();
             return services;
