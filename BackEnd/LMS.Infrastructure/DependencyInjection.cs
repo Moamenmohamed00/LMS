@@ -1,4 +1,3 @@
-using LMS.Application.Irepo;
 using LMS.Application.IRepositories;
 using LMS.Application.Services.Auth;
 using LMS.Application.Services.Email;

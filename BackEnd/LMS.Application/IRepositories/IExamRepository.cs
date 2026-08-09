@@ -1,9 +1,10 @@
 using LMS.Domain.Entities;
 
-namespace LMS.Application.Irepo;
+namespace LMS.Application.IRepositories;
 
-public interface IExamRepository:IGenericRepository<Exam>
+public interface IExamRepository : IGenericRepository<Exam>
 {
     Task<IEnumerable<Exam>> GetByCourseAsync(Guid courseId);
-    Task<IEnumerable<Question>> GetWithQuestionsAsync(Guid examId);
+    Task<Exam?> GetWithQuestionsAsync(Guid examId);
+    Task<Exam?> GetWithQuestionsAndChoicesAsync(Guid examId);
 }

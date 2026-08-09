@@ -1,7 +1,7 @@
 namespace LMS.Application.Services.Auth;
 
 using LMS.Application.DTOs.Auth;
-using LMS.Application.Services;
+using LMS.Application.Services.Iinfra;
 using LMS.Application.Services.Email;
 using LMS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;

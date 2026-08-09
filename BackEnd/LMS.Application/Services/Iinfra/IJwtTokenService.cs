@@ -1,6 +1,5 @@
 using LMS.Domain.Entities;
-
-namespace LMS.Application.Services
+namespace LMS.Application.Services.Iinfra
 {
     public interface IJwtTokenService
     {

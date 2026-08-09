@@ -1,5 +1,5 @@
 
-using LMS.Application.Services;
+using LMS.Application.Services.Iinfra;
 using LMS.Domain.Entities;
 using LMS.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
